@@ -1,0 +1,31 @@
+Private Sub Workbook_BeforeSave(ByVal SaveAsUI As Boolean, _
+Cancel As Boolean)
+
+
+Dim rngCell As Range
+Dim lngLstRow As Long, lngTCols As Long
+Dim lngRowCheck(1 To 2) As String
+
+
+lngRowCheck(1) = "BD"
+lngRowCheck(2) = "BQ"
+
+
+lngLstRow = ActiveSheet.UsedRange.Rows.Count
+
+
+For i = 1 To UBound(lngRowCheck)
+    For Each rngCell In Range(lngRowCheck(i) & "15:" & lngRowCheck(i) & lngLstRow)
+        If rngCell.Value = 0 Then
+            MsgBox ("Please enter a value in " & rngCell.Address)
+            rngCell.Select
+            Exit Sub
+        End If
+    Next
+Next i
+
+
+End Sub
+
+
+
